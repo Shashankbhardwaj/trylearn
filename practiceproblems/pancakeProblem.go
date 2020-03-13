@@ -1,4 +1,4 @@
-package practiceProblems
+package practiceproblems
 
 import (
 	"fmt"
@@ -28,7 +28,7 @@ func PancakeProblem() {
 		// fmt.Println("\n", stringStack, lenStack, "\n")
 		// maneuverCount = maneuver(stringStack, lenStack-1, 0)
 		maneuverCount = maneuverWitoutChange(inputStacks[i])
-		fmt.Printf("\nCase #%d: %d\n", i, maneuverCount)
+		fmt.Printf("\nCase #%d: %d\n", i+1, maneuverCount)
 	}
 }
 

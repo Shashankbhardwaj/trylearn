@@ -1,7 +1,7 @@
 package main
 
 import (
-	pp "trylearn/practiceProblems"
+	pp "trylearn/practiceproblems"
 )
 
 func main() {

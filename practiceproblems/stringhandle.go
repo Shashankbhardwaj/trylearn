@@ -1,4 +1,4 @@
-package practiceProblems
+package practiceproblems
 
 import (
 	"fmt"
