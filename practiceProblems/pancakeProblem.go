@@ -1,10 +1,10 @@
-package main
+package practiceProblems
 
 import (
 	"fmt"
 )
 
-func main() {
+func PancakeProblem() {
 	var (
 		testCases  int
 		inputStack string

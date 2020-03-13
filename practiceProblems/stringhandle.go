@@ -1,10 +1,10 @@
-package main
+package practiceProblems
 
 import (
 	"fmt"
 )
 
-func main() {
+func StringHandle() {
 
 	stringArr := []string{"4", "11", "3", "5", "-10", "3", "-5", "-8", "9", "12", "-13", "-14", "15", "20", "-6"}
 	var result string
