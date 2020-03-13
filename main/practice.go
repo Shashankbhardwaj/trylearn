@@ -2,49 +2,52 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func main() {
 	var (
-		testCases     int
-		inputStacks   []string
-		inputStack    string
-		lenStack      int
+		testCases  int
+		inputStack string
+		// lenStack      int
 		maneuverCount int
+		inputStacks   []string
 	)
-	fmt.Println("Enter the Test Cases \n")
+	// fmt.Println("Enter the Test Cases \n")
 	fmt.Scanf("%d", &testCases)
-	fmt.Printf("\nEnter %d input Strings\n", testCases)
+	// fmt.Printf("\nEnter %d input Strings\n", testCases)
 	for i := 0; i < testCases; i++ {
 		fmt.Scanf("%s", &inputStack)
-		lenStack = len(inputStack)
-		stringStack := strings.Split(inputStack, "")
-		fmt.Println("\n", stringStack, lenStack, "\n")
-		maneuverCount = maneuver(stringStack, lenStack-1, 0)
-
 		inputStacks = append(inputStacks, inputStack)
 	}
-	fmt.Println(inputStacks, maneuverCount)
+
+	for i := 0; i < testCases; i++ {
+		maneuverCount = 0
+		// lenStack = 0
+		// lenStack = len(inputStacks[i])
+		// stringStack := strings.Split(inputStacks[i], "")
+		// fmt.Println("\n", stringStack, lenStack, "\n")
+		// maneuverCount = maneuver(stringStack, lenStack-1, 0)
+		maneuverCount = maneuverWitoutChange(inputStacks[i])
+		fmt.Printf("\nCase #%d: %d\n", i, maneuverCount)
+	}
 }
 
 func maneuver(inputStack []string, downFaceCount, maneuverCount int) int {
 
-	fmt.Println("inside maneuver \n", inputStack, downFaceCount, maneuverCount, "\n")
-	fmt.Println("before calling findDownfacecount \n", inputStack, downFaceCount, "\n")
+	// fmt.Println("inside maneuver \n", inputStack, downFaceCount, maneuverCount, "\n")
+	// fmt.Println("before calling findDownfacecount \n", inputStack, downFaceCount, "\n")
 	downFaceCount = findNextDownFaceCount(inputStack, downFaceCount)
-	fmt.Println("after calling findDownfacecount \n", inputStack, downFaceCount, maneuverCount, "\n")
+	// fmt.Println("after calling findDownfacecount \n", inputStack, downFaceCount, maneuverCount, "\n")
 	if downFaceCount >= 0 {
 		maneuverCount = maneuverCount + 1
 		for j := downFaceCount; j >= 0; j-- {
-			fmt.Println("before calling revertFace\n", inputStack, j, "\n")
+			// fmt.Println("before calling revertFace\n", inputStack, j, "\n")
 			inputStack = revertFace(inputStack, j)
-			fmt.Println("after calling revertFace\n", inputStack, j, "\n")
+			// fmt.Println("after calling revertFace\n", inputStack, j, "\n")
 		}
-		fmt.Println("before calling maneuver \n", inputStack, downFaceCount, maneuverCount, "\n")
+		// fmt.Println("before calling maneuver \n", inputStack, downFaceCount, maneuverCount, "\n")
 		maneuverCount = maneuver(inputStack, downFaceCount-1, maneuverCount)
 	}
-	fmt.Printf("ManeuverCount %d", maneuverCount)
 	return maneuverCount
 
 }
@@ -67,4 +70,28 @@ func revertFace(inputString []string, count int) []string {
 		inputString[count] = "-"
 	}
 	return inputString
+}
+
+func maneuverWitoutChange(inputStack string) int {
+
+	maneuverCount := 0
+	firstFaceDown := 0
+	for j := len(inputStack) - 1; j >= 0; j-- {
+		if inputStack[j] == '-' {
+			firstFaceDown = j
+			break
+		}
+	}
+
+	for i := firstFaceDown; i >= 0; i-- {
+		if i < len(inputStack)-1 {
+			if inputStack[i] != inputStack[i+1] {
+				maneuverCount++
+			}
+		} else if i == len(inputStack)-1 {
+			maneuverCount++
+		}
+	}
+
+	return maneuverCount
 }
